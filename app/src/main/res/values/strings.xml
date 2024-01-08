@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PMA</string>
+    <string name="register"><u>Register</u></string>
+    <string name="reset"><u>Reset</u></string>
+    <string name="upload_picture"><u>Upload Picture</u></string>
+    <string name="update_email"><u>Update Email</u></string>
 </resources>

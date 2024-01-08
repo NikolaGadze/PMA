@@ -3,6 +3,7 @@ package ba.sum.fpmoz.pma;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,13 +33,16 @@ public class UserProfileActivity extends AppCompatActivity {
     private String fullName, email, doB, gender, mobile;
     private ImageView imageView;
     private FirebaseAuth authProfile;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        //getSupportActionBar().setTitle("Home");
+        getSupportActionBar().setTitle("Home");
+
+        swipeToRefresh();
 
         textViewWelcome = findViewById(R.id.textView_show_welcome);
         textViewFullName = findViewById(R.id.textView_show_full_name);
@@ -46,7 +50,7 @@ public class UserProfileActivity extends AppCompatActivity {
         textViewDoB = findViewById(R.id.textView_show_dob);
         textViewGender = findViewById(R.id.textView_show_gender);
         textViewMobile = findViewById(R.id.textView_show_mobile);
-        progressBar = findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progress_bar);
 
         //Set OnClickListener on ImageView to Open UploadProfilePicActivity
         imageView = findViewById(R.id.imageView_profile_dp);
@@ -68,6 +72,27 @@ public class UserProfileActivity extends AppCompatActivity {
             progressBar.setVisibility(View.VISIBLE);
             showUserProfile(firebaseUser);
         }
+    }
+
+    private void swipeToRefresh() {
+        //Look up for the Swipe Container
+        swipeContainer = findViewById(R.id.swipeContainer);
+
+        //Setup Refresh Listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+               //Code to refresh goes here, swipeContainer must be called once the refresh is complete
+                startActivity(getIntent());
+                finish();
+                overridePendingTransition(0,0);
+                swipeContainer.setRefreshing(false);
+            }
+        });
+
+        //Configure refresh colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
+
     }
 
     private void checkIfEmailVerified(FirebaseUser firebaseUser) {
@@ -167,7 +192,7 @@ public class UserProfileActivity extends AppCompatActivity {
             startActivity(getIntent());
             finish();
             overridePendingTransition(0, 0);
-        }/* else if (id == R.id.menu_update_profile) {
+        } else if (id == R.id.menu_update_profile) {
             Intent intent = new Intent(UserProfileActivity.this, UpdateProfileActivity.class);
             startActivity(intent);
         } else if (id == R.id.menu_update_email) {
@@ -179,7 +204,7 @@ public class UserProfileActivity extends AppCompatActivity {
         } else if (id == R.id.menu_delete_profile) {
             Intent intent = new Intent(UserProfileActivity.this, DeleteProfileActivity.class);
             startActivity(intent);
-        }*/ else if (id == R.id.menu_logout) {
+        } else if (id == R.id.menu_logout) {
             authProfile.signOut();
             Toast.makeText(UserProfileActivity.this, "Logged out", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(UserProfileActivity.this, MainActivity.class);

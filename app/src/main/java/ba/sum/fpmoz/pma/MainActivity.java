@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Setting the title
-        //getSupportActionBar().setTitle("Taskmaster App");
+        getSupportActionBar().setTitle("Taskmaster App");
 
         //Opening Login activity
         Button buttonLogin = findViewById(R.id.button_login);
@@ -28,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Opening Register Activity
-        Button buttonRegister = findViewById(R.id.button_register);
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
+        TextView textViewRegister = findViewById(R.id.textView_register_link);
+        textViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
