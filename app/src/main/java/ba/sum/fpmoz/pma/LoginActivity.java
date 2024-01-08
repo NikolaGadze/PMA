@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //getSupportActionBar().setTitle("Login");
+        getSupportActionBar().setTitle("Login");
 
         editTextLoginEmail = findViewById(R.id.editText_login_email);
         editTextLoginPwd = findViewById(R.id.editText_login_pwd);
@@ -48,12 +49,22 @@ public class LoginActivity extends AppCompatActivity {
         authProfile = FirebaseAuth.getInstance();
 
         //Reset Password
-        Button buttonForgotPassword = findViewById(R.id.button_forgot_password);
-        buttonForgotPassword.setOnClickListener(new View.OnClickListener() {
+        TextView textViewLinkResetPwd = findViewById(R.id.textView_forgot_password_link);
+        textViewLinkResetPwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(LoginActivity.this, "You can reset your password now!", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+            }
+        });
+
+        //Register
+        TextView textViewLinkRegister = findViewById(R.id.textView_register_link);
+        textViewLinkRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LoginActivity.this, "You can register now!", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
 
@@ -131,6 +142,9 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "You are logged in now", Toast.LENGTH_SHORT).show();
 
                         //Open User Profile
+                        Intent intent = new Intent(LoginActivity.this, UserProfileActivity.class);
+                        startActivity(intent);
+                        finish();
                     } else {
                         firebaseUser.sendEmailVerification();
                         authProfile.signOut(); //Sign out user

@@ -42,7 +42,7 @@ public class UploadProfilePicActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_profile_pic);
 
-        //getSupportActionBar().setTitle("Upload Profile Picture");
+        getSupportActionBar().setTitle("Upload Profile Picture");
 
         Button buttonUploadPicChoose = findViewById(R.id.upload_pic_choose_button);
         Button buttonUploadPic = findViewById(R.id.upload_pic_button);
@@ -99,7 +99,7 @@ public class UploadProfilePicActivity extends AppCompatActivity {
     private void UploadPic() {
         if (uriImage != null) {
             //Save the image with uid of the currently logged user
-            StorageReference fileReference = storageReference.child(authProfile.getCurrentUser().getUid() + "." + getFileExtension(uriImage));
+            StorageReference fileReference = storageReference.child(authProfile.getCurrentUser().getUid() + "/displaypic." + getFileExtension(uriImage));
 
             //Upload image to Storage
             fileReference.putFile(uriImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -144,7 +144,6 @@ public class UploadProfilePicActivity extends AppCompatActivity {
     }
 
     //Creating ActionBar Menu
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //Inflate menu items
@@ -163,19 +162,23 @@ public class UploadProfilePicActivity extends AppCompatActivity {
             startActivity(getIntent());
             finish();
             overridePendingTransition(0, 0);
-        }/* else if (id == R.id.menu_update_profile) {
+        } else if (id == R.id.menu_update_profile) {
             Intent intent = new Intent(UploadProfilePicActivity.this, UpdateProfileActivity.class);
             startActivity(intent);
+            finish();
         } else if (id == R.id.menu_update_email) {
             Intent intent = new Intent(UploadProfilePicActivity.this, UpdateEmailActivity.class);
             startActivity(intent);
+            finish();
         } else if (id == R.id.menu_change_password) {
             Intent intent = new Intent(UploadProfilePicActivity.this, ChangePasswordActivity.class);
             startActivity(intent);
+            finish();
         } else if (id == R.id.menu_delete_profile) {
             Intent intent = new Intent(UploadProfilePicActivity.this, DeleteProfileActivity.class);
             startActivity(intent);
-        }*/ else if (id == R.id.menu_logout) {
+            finish();
+        } else if (id == R.id.menu_logout) {
             authProfile.signOut();
             Toast.makeText(UploadProfilePicActivity.this, "Logged out", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(UploadProfilePicActivity.this, MainActivity.class);

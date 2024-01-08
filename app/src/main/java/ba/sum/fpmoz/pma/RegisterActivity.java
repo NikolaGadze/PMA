@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        //getSupportActionBar().setTitle("Register");
+        getSupportActionBar().setTitle("Register");
 
         Toast.makeText(RegisterActivity.this,"You can register now", Toast.LENGTH_LONG).show();
 
@@ -251,10 +251,10 @@ public class RegisterActivity extends AppCompatActivity {
                     try {
                         throw task.getException();
                     } catch (FirebaseAuthWeakPasswordException e) {
-                        editTextRegisterPwd.setError("Your password is too weak. Kindly use a mix of alphabets, numbers and special characters");
+                        editTextRegisterPwd.setError("Your password is too weak. Please use a mix of alphabets, numbers and special characters");
                         editTextRegisterPwd.requestFocus();
                     } catch (FirebaseAuthInvalidCredentialsException e) {
-                        editTextRegisterEmail.setError("Your email is invalid or already in use. Kindly re-enter.");
+                        editTextRegisterEmail.setError("Your email is invalid or already in use. Please re-enter.");
                         editTextRegisterEmail.requestFocus();
                     } catch (FirebaseAuthUserCollisionException e) {
                         editTextRegisterEmail.setError("User is already registered with this email. Use another email.");
