@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PMA</string>
+    <string name="app_name">Taskmaster App</string>
     <string name="register"><u>Register</u></string>
     <string name="reset"><u>Reset</u></string>
     <string name="upload_picture"><u>Upload Picture</u></string>
