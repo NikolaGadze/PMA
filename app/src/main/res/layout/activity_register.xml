@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeContainer"
@@ -41,7 +41,7 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:layout_below="@id/textView_register_head"
-                    android:text="Please register yourself to continue with the amazing experience!"
+                    android:text="Please enter your data to successfully create an account!"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
             </RelativeLayout>
@@ -464,13 +464,27 @@
                 </RelativeLayout>
 
 
+                <TextView
+                    android:id="@+id/termsAndPrivacyLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/RL_pwd_conf"
+                    android:layout_marginTop="15dp"
+                    android:text="By registering you are accepting our Terms of Use and Privacy Policy."
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:clickable="true"
+                    android:onClick="openTermsAndPrivacy"/>
+
+
+
                 <Button
                     android:id="@+id/button_register"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/RL_pwd_conf"
+                    android:layout_below="@id/termsAndPrivacyLink"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginBottom="50dp"
                     android:backgroundTint="@color/light_blue"
                     android:textColor="@color/white"
@@ -491,4 +505,4 @@
 
     </ScrollView>
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
