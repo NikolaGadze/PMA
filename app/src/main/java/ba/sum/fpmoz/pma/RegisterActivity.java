@@ -2,11 +2,18 @@ package ba.sum.fpmoz.pma;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -16,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -64,6 +72,54 @@ public class RegisterActivity extends AppCompatActivity {
         //RadioButton for Gender
         radioGroupRegisterGender = findViewById(R.id.radio_group_register_gender);
         radioGroupRegisterGender.clearCheck();
+
+        // Find the TextView by its ID
+        TextView termsAndPrivacyLink = findViewById(R.id.termsAndPrivacyLink);
+
+        // Set the movement method to make the link clickable
+        termsAndPrivacyLink.setMovementMethod(LinkMovementMethod.getInstance());
+
+        // Create a clickable span for Terms of Use
+        ClickableSpan termsOfUseSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                openWebPage("https://doc-hosting.flycricket.io/taskmaster-app-terms-of-use/393b8d4e-7741-42de-a48d-b23c555d259d/terms");
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setColor(ContextCompat.getColor(RegisterActivity.this, R.color.light_blue));
+                ds.setUnderlineText(false); // Remove underline for the clickable span
+            }
+        };
+
+        // Create a clickable span for Privacy Policy
+        ClickableSpan privacyPolicySpan = new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                openWebPage("https://doc-hosting.flycricket.io/taskmaster-app-privacy-policy/cd70a4ee-abb0-46d0-8a05-cc6bb8dd9299/privacy");
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setColor(ContextCompat.getColor(RegisterActivity.this, R.color.light_blue));
+                ds.setUnderlineText(false); // Remove underline for the clickable span
+            }
+        };
+
+        // Set the clickable spans for Terms of Use and Privacy Policy
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(termsAndPrivacyLink.getText());
+        spannableStringBuilder.setSpan(termsOfUseSpan, 37, 49, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableStringBuilder.setSpan(privacyPolicySpan, 54, 68, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // Set the modified text to the TextView
+        termsAndPrivacyLink.setText(spannableStringBuilder);
+
+
+
+
 
         //Setting up DatePicker on EditText
         editTextRegisterDob.setOnClickListener(new View.OnClickListener() {
@@ -196,6 +252,24 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
+
+    // Method to open the Terms of Use and Privacy Policy links
+    public void openTermsAndPrivacy(View view) {
+        // You can handle the click event for the entire message if needed
+    }
+
+    // Helper method to open a web page
+    private void openWebPage(String url) {
+        Uri webpage = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+
+
+
     //Register User using the given credentials
     private void registerUser(String textFullName, String textEmail, String textDoB, String textGender, String textMobile, String textPwd) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
