@@ -120,7 +120,8 @@ public class UploadProfilePicActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(UploadProfilePicActivity.this, "Upload Successful!", Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(UploadProfilePicActivity.this, UserProfileActivity.class);
+                    Intent intent = new Intent(UploadProfilePicActivity.this, StartActivity.class);
+                    intent.putExtra("openProfileFragment", true);
                     startActivity(intent);
                     finish();
                 }

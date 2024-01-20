@@ -65,9 +65,9 @@ public class DeleteProfileActivity extends AppCompatActivity {
 
         if (firebaseUser.equals("")) {
             Toast.makeText(DeleteProfileActivity.this, "Something went wrong!" + "User's Deatils are not available at the moment.", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(DeleteProfileActivity.this, UserProfileActivity.class);
+            Intent intent = new Intent(DeleteProfileActivity.this, StartActivity.class);
+            intent.putExtra("openProfileFragment", true);
             startActivity(intent);
-            finish();
         } else {
             reAuthenticateUser(firebaseUser);
         }
@@ -151,9 +151,9 @@ public class DeleteProfileActivity extends AppCompatActivity {
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(DeleteProfileActivity.this, UserProfileActivity.class);
+                Intent intent = new Intent(DeleteProfileActivity.this, StartActivity.class);
+                intent.putExtra("openProfileFragment", true);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -181,6 +181,7 @@ public class DeleteProfileActivity extends AppCompatActivity {
                      authProfile.signOut();
                      Toast.makeText(DeleteProfileActivity.this, "User has been deleted!", Toast.LENGTH_SHORT).show();
                      Intent intent = new Intent(DeleteProfileActivity.this, MainActivity.class);
+                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Add this line
                      startActivity(intent);
                      finish();
                  } else {

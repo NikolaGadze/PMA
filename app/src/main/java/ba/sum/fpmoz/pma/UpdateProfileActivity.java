@@ -197,9 +197,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
                         Toast.makeText(UpdateProfileActivity.this, "Update Successful!", Toast.LENGTH_LONG).show();
 
-                        //Stop user from returing to UpdateProfileActivity on pressing back button and close activity
-                        Intent intent = new Intent(UpdateProfileActivity.this, UserProfileActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        Intent intent = new Intent(UpdateProfileActivity.this, StartActivity.class);
+                        intent.putExtra("openProfileFragment", true);
                         startActivity(intent);
                         finish();
                     } else {

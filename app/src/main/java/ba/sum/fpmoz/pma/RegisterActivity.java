@@ -251,6 +251,16 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        //Login
+        TextView textViewLogin = findViewById(R.id.textView_lead_to_login);
+        textViewLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(RegisterActivity.this, "You can login now!", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+            }
+        });
+
     }
 
     // Method to open the Terms of Use and Privacy Policy links
@@ -303,13 +313,17 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 Toast.makeText(RegisterActivity.this, "User registered successfully. Please verify your email", Toast.LENGTH_LONG).show();
 
-                            //Open User Profile after successful registration
-                            Intent intent = new Intent(RegisterActivity.this, UserProfileActivity.class);
+                                //Open Home Fragment after successful registration
+                                Intent intent = new Intent(RegisterActivity.this, StartActivity.class);
 
-                            //To Prevent User from returing back to Register Activtiy on pressing back button after registration
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            finish(); //to close Register Activity
+                                //To Prevent User from returning back to Register Activity on pressing back button after registration
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                                // Add this line to open HomeFragment in StartActivity
+                                intent.putExtra("openHomeFragment", true);
+
+                                startActivity(intent);
+                                finish(); //to close Register Activity
 
                             } else {
 

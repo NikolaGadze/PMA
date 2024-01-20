@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "You are logged in now", Toast.LENGTH_SHORT).show();
 
                         //Open User Profile
-                        Intent intent = new Intent(LoginActivity.this, UserProfileActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, StartActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
@@ -206,7 +206,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, "Already Logged In!", Toast.LENGTH_SHORT).show();
 
             //Start the UserProfileActivity
-            startActivity(new Intent(LoginActivity.this, UserProfileActivity.class));
+            startActivity(new Intent(LoginActivity.this, StartActivity.class));
             finish();  // Close Login Activity
         } else {
             Toast.makeText(LoginActivity.this, "You can login now!", Toast.LENGTH_SHORT).show();
