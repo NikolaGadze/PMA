@@ -156,7 +156,8 @@ public class UpdateEmailActivity extends AppCompatActivity {
                     firebaseUser.sendEmailVerification();
 
                     Toast.makeText(UpdateEmailActivity.this, "Email has been updated. Please verify your new Email", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(UpdateEmailActivity.this, UserProfileActivity.class);
+                    Intent intent = new Intent(UpdateEmailActivity.this, StartActivity.class);
+                    intent.putExtra("openProfileFragment", true);
                     startActivity(intent);
                     finish();
                 } else {

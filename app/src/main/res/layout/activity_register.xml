@@ -485,10 +485,38 @@
                     android:layout_below="@id/termsAndPrivacyLink"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
-                    android:layout_marginBottom="50dp"
                     android:backgroundTint="@color/light_blue"
                     android:textColor="@color/white"
                     android:text="Register" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/button_register"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal"
+                    android:id="@+id/LL_lead_to_login">
+
+                    <TextView
+                        android:id="@+id/textView_existing_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/gray"
+                        android:textSize="17sp"
+                        android:text="Already have an account?" />
+
+                    <TextView
+                        android:id="@+id/textView_lead_to_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/login"
+                        android:textSize="17sp"
+                        android:textColor="@color/light_blue"/>
+
+                </LinearLayout>
 
                 <ProgressBar
                     android:id="@+id/progressBar"

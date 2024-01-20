@@ -57,9 +57,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         if (firebaseUser.equals("")) {
             Toast.makeText(ChangePasswordActivity.this, "Something went wrong! User's details not available", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(ChangePasswordActivity.this, UserProfileActivity.class);
+            Intent intent = new Intent(ChangePasswordActivity.this, StartActivity.class);
+            intent.putExtra("openProfileFragment", true);
             startActivity(intent);
-            finish();
         } else {
             reAuthenticateUser(firebaseUser);
         }
@@ -156,7 +156,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
                         Toast.makeText(ChangePasswordActivity.this, "Password has been changed", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(ChangePasswordActivity.this, UserProfileActivity.class);
+                        Intent intent = new Intent(ChangePasswordActivity.this, StartActivity.class);
+                        intent.putExtra("openProfileFragment", true);
                         startActivity(intent);
                         finish();
                     } else {

@@ -4,4 +4,7 @@
     <string name="reset"><u>Reset</u></string>
     <string name="upload_picture"><u>Upload Picture</u></string>
     <string name="update_email"><u>Update Email</u></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login"><u>Login</u></string>
 </resources>
