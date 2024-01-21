@@ -1,14 +1,197 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.CreateTaskFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Create Task" />
+        android:background="@color/light_gray">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/light_gray"
+            android:padding="16dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/textView_task_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    android:text="Task Name " />
+
+                <EditText
+                    android:id="@+id/editText_task_name"
+                    android:layout_below="@id/textView_task_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:hint="Enter the Name of the Task"
+                    android:background="@drawable/border"
+                    android:padding="15dp"
+                    android:textCursorDrawable="@drawable/edittextcursor"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray"
+                    android:textSize="16sp"
+                    android:inputType="text" />
+
+                <TextView
+                    android:id="@+id/textView_task_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/editText_task_name"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    android:text="Task Description " />
+
+                <EditText
+                    android:id="@+id/editText_task_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border"
+                    android:padding="15dp"
+                    android:layout_below="@id/textView_task_description"
+                    android:hint="Task Description"
+                    android:textCursorDrawable="@drawable/edittextcursor"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray"
+                    android:textSize="16sp"
+                    android:layout_marginTop="3dp"
+                    android:inputType="textMultiLine" />
+
+                <TextView
+                    android:id="@+id/textView_task_date_of_creation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/editText_task_description"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    android:text="Date of Creation: " />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textView_task_date_of_creation"
+                    android:background="@drawable/border"
+                    android:padding="4dp"
+                    android:layout_marginTop="3dp"
+                    android:id="@+id/LinearLayout_date_of_creation">
+
+                    <EditText
+                        android:id="@+id/editText_task_date_of_creation"
+                        android:layout_width="250dp"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:hint="Select the Date"
+                        android:focusable="false"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/gray"
+                        android:inputType="date"
+                        android:padding="6dp"
+                        android:textCursorDrawable="@drawable/edittextcursor"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView_date_picker_creation"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_below="@id/textView_register_dob"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_toEndOf="@id/editText_task_date_of_creation"
+                        android:src="@drawable/ic_calendar" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView_task_date_of_completion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/LinearLayout_date_of_creation"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    android:text="Date of Completion: " />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textView_task_date_of_completion"
+                    android:background="@drawable/border"
+                    android:padding="4dp"
+                    android:layout_marginTop="3dp"
+                    android:id="@+id/LinearLayout_date_of_completion">
+
+                    <EditText
+                        android:id="@+id/editText_task_date_of_completion"
+                        android:layout_width="250dp"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:hint="Select the Date"
+                        android:focusable="false"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/gray"
+                        android:inputType="date"
+                        android:padding="6dp"
+                        android:textCursorDrawable="@drawable/edittextcursor"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView_date_picker_completion"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_below="@id/textView_register_dob"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_toEndOf="@id/editText_task_date_of_creation"
+                        android:src="@drawable/ic_calendar" />
+
+                </LinearLayout>
+
+
+
+                <TextView
+                    android:id="@+id/task_members"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/LinearLayout_date_of_completion"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    android:text="Task Members: " />
+
+                <Button
+                    android:id="@+id/add_member_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/task_members"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/light_blue"
+                    android:text="Add Member" />
+
+                <Button
+                    android:id="@+id/create_task_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/add_member_button"
+                    android:textColor="@color/white"
+                    android:text="Create Task" />
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>
