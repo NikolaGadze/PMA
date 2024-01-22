@@ -187,6 +187,16 @@
                     android:textColor="@color/white"
                     android:text="Create Task" />
 
+                <ProgressBar
+                    android:id="@+id/create_task_progress_bar"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
+                    android:elevation="10dp"
+                    android:visibility="gone" />
+
 
             </RelativeLayout>
 
