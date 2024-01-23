@@ -35,8 +35,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -142,7 +145,6 @@ public class CreateTaskFragment extends Fragment {
         addMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Show a dialog to add members
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Add Member");
 
@@ -152,12 +154,28 @@ public class CreateTaskFragment extends Fragment {
                 builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String member = input.getText().toString();
-                        if (android.util.Patterns.EMAIL_ADDRESS.matcher(member).matches()) {
-                            String encodedMember = member.replace('.', ',');
-                            members.add(encodedMember);
-                            isMemberAdded = true;
-                            checkFieldsForEmptyValues();
+                        String memberEmail = input.getText().toString();
+                        if (android.util.Patterns.EMAIL_ADDRESS.matcher(memberEmail).matches()) {
+                            String encodedMemberEmail = memberEmail.replace('.', ',');
+                            DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+                            database.child("EmailToUUID").child(encodedMemberEmail).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    String memberUUID = dataSnapshot.getValue(String.class);
+                                    if (memberUUID != null) {
+                                        members.add(memberUUID);
+                                        isMemberAdded = true;
+                                        checkFieldsForEmptyValues();
+                                    } else {
+                                        Toast.makeText(getContext(), "User not found", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    Toast.makeText(getContext(), "Error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         } else {
                             Toast.makeText(getContext(), "Invalid email format", Toast.LENGTH_SHORT).show();
                         }
