@@ -280,7 +280,6 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-    //Register User using the given credentials
     private void registerUser(String textFullName, String textEmail, String textDoB, String textGender, String textMobile, String textPwd) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
@@ -297,7 +296,7 @@ public class RegisterActivity extends AppCompatActivity {
                     firebaseUser.updateProfile(profileChangeRequest);
 
                     //Enter User Data into the Firebase Realtime Database.
-                    ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(textDoB, textGender, textMobile);
+                    ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(textDoB, textGender, textMobile, textEmail);
 
                     //Extracting User reference from Database for "Registered Users"
                     DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Registered Users");
@@ -310,6 +309,11 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 //Send Verification Email
                                 firebaseUser.sendEmailVerification();
+
+                                // Add user's email and UUID to "EmailToUUID" node
+                                String encodedEmail = textEmail.replace('.', ',');
+                                DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+                                database.child("EmailToUUID").child(encodedEmail).setValue(firebaseUser.getUid());
 
                                 Toast.makeText(RegisterActivity.this, "User registered successfully. Please verify your email", Toast.LENGTH_LONG).show();
 
