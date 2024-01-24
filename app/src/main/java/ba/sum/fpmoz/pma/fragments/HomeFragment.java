@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,6 +33,8 @@ import ba.sum.fpmoz.pma.adapters.TaskAdapter;
 
 public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
+    private ProgressBar progressBar;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -40,25 +44,20 @@ public class HomeFragment extends Fragment {
         if (getActivity() != null) {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Home");
         }
-
     }
-
-    /*
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
-    }
-     */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = view.findViewById(R.id.mRecyclerView);
+        progressBar = view.findViewById(R.id.progress_bar_home_fragment);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+
+        progressBar.setVisibility(View.VISIBLE);
+
         database.child("tasks").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -71,18 +70,18 @@ public class HomeFragment extends Fragment {
                 }
                 TaskAdapter adapter = new TaskAdapter(tasks, currentUser.getUid());
                 recyclerView.setAdapter(adapter);
+
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle error...
+
+                Toast.makeText(getActivity(), "Something went wrong! Could not load data.", Toast.LENGTH_LONG).show();
+                progressBar.setVisibility(View.GONE);
             }
         });
 
         return view;
     }
-
-
-
-
 }
