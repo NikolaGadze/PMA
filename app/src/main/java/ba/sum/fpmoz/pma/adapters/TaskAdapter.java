@@ -1,5 +1,6 @@
 package ba.sum.fpmoz.pma.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import ba.sum.fpmoz.pma.HandleTaskInformation;
 import ba.sum.fpmoz.pma.R;
+import ba.sum.fpmoz.pma.SingleTaskViewActivity;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
     private List<HandleTaskInformation> tasks;
@@ -40,6 +42,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         } else {
             holder.ownerBadge.setVisibility(View.GONE);
         }
+
     }
 
     @Override
@@ -59,6 +62,20 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             dateOfCreationTextView = itemView.findViewById(R.id.date1);
             dateOfCompletionTextView = itemView.findViewById(R.id.date2);
             ownerBadge = itemView.findViewById(R.id.ownerBadge);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        HandleTaskInformation clickedTask = tasks.get(position);
+
+                        Intent intent = new Intent(v.getContext(), SingleTaskViewActivity.class);
+                        intent.putExtra("task", clickedTask);
+                        v.getContext().startActivity(intent);
+                    }
+                }
+            });
         }
     }
 }
