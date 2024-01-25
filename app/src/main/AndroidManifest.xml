@@ -15,6 +15,9 @@
         android:theme="@style/Theme.PMA"
         tools:targetApi="31">
         <activity
+            android:name=".AddTaskImageAndDescriptionActivity"
+            android:exported="false" />
+        <activity
             android:name=".SingleTaskViewActivity"
             android:exported="false" />
         <activity
