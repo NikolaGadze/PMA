@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SingleTaskViewActivity extends AppCompatActivity {
@@ -46,5 +47,13 @@ public class SingleTaskViewActivity extends AppCompatActivity {
 
         TextView status = findViewById(R.id.status_value);
         status.setText(task.getStatus());
+
+        FloatingActionButton fabEdit = findViewById(R.id.fab_edit);
+
+        if (currentUserUUID.equals(task.getCreatorUUID())) {
+            fabEdit.show();
+        } else {
+            fabEdit.hide();
+        }
     }
 }

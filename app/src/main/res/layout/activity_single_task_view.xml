@@ -1,165 +1,197 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/light_gray"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:id="@+id/task_info_linear_layout"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@color/light_gray"
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="74dp"> <!-- Assuming FloatingActionButton height is around 64dp with 16dp margin -->
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:id="@+id/task_info_linear_layout"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/creator_indicator"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/baseline_priority_high_24_black" />
-
-            <TextView
-                android:id="@+id/creator_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This indicates that you are the creator of this task"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:layout_marginLeft="8dp" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/task_info_heading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Task Information"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border"
-            android:orientation="vertical"
-            android:layout_marginTop="16dp"
-            android:padding="8dp">
-
-            <TextView
-                android:id="@+id/description_label"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Description"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/creator_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/baseline_priority_high_24_black" />
+
+                <TextView
+                    android:id="@+id/creator_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This indicates that you are the creator of this task"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="8dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/task_info_heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Task Information"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:gravity="center"
-                android:layout_marginTop="8dp" />
-
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Here there will be a lot of text"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border"
-            android:orientation="vertical"
-            android:layout_marginTop="16dp"
-            android:padding="8dp">
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:background="@drawable/border"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp"
+                android:padding="8dp">
 
-                <TextView
-                    android:id="@+id/created_label"
-                    android:layout_width="0dp"
+                <!--<TextView
+                    android:id="@+id/description_label"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Created:"
+                    android:text="Description"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:layout_weight="1" />
+                    android:gravity="center"
+                    android:layout_marginTop="8dp" />-->
 
                 <TextView
-                    android:id="@+id/date_of_creation"
-                    android:layout_width="0dp"
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="date_of_creation"
-                    android:textColor="@color/lime"
+                    android:text="Here there will be a lot of text"
+                    android:gravity="center"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:layout_weight="1" />
+                    android:layout_marginTop="8dp" />
+
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:background="@drawable/border"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp"
+                android:padding="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/created_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Created:"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/date_of_creation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="date_of_creation"
+                        android:textColor="@color/lime"
+                        android:textSize="16sp"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/deadline_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Deadline:"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/date_of_completion"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="date_of_completion"
+                        android:textColor="@color/red"
+                        android:textSize="16sp"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:padding="8dp">
 
                 <TextView
-                    android:id="@+id/deadline_label"
+                    android:id="@+id/status_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Deadline:"
+                    android:layout_weight="1"
+                    android:text="Status:"
                     android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/status_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="In Progress"
+                    android:textColor="@color/orange"
                     android:textSize="16sp"
                     android:layout_weight="1" />
 
-                <TextView
-                    android:id="@+id/date_of_completion"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="date_of_completion"
-                    android:textColor="@color/red"
-                    android:textSize="16sp"
-                    android:layout_weight="1" />
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp"
-            android:padding="8dp">
+    </androidx.core.widget.NestedScrollView>
 
-            <TextView
-                android:id="@+id/status_label"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Status:"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/baseline_add_24"
+        app:fabSize="normal"
+        app:backgroundTint="@color/blueBlack"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-            <TextView
-                android:id="@+id/status_value"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="In Progress"
-                android:textColor="@color/orange"
-                android:textSize="16sp"
-                android:layout_weight="1" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="16dp"
+        android:src="@drawable/baseline_edit_24"
+        app:fabSize="normal"
+        app:backgroundTint="@color/orange"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        </LinearLayout>
-
-    </LinearLayout>
-
-</ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
