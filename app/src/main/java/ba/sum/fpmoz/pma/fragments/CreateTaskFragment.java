@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -57,6 +58,8 @@ public class CreateTaskFragment extends Fragment {
     private Button addMember, createTask;
     private ProgressBar progressBar;
     private FirebaseAuth authProfile;
+
+    private String taskId;
 
     private boolean isMemberAdded = false;
     private List<String> members = new ArrayList<>();
@@ -219,9 +222,12 @@ public class CreateTaskFragment extends Fragment {
 
                     String creatorUUID = authProfile.getCurrentUser().getUid();
 
-                    HandleTaskInformation task = new HandleTaskInformation(name, description, dateOfCreation, dateOfCompletion, status, membersMap, images, creatorUUID);
-
                     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+                    String taskId = database.child("tasks").push().getKey();
+
+                    HandleTaskInformation task = new HandleTaskInformation(name, description, dateOfCreation, dateOfCompletion, status, membersMap, images, creatorUUID, taskId);
+
+                    //DatabaseReference database = FirebaseDatabase.getInstance().getReference();
                     database.child("tasks").push().setValue(task).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -255,6 +261,8 @@ public class CreateTaskFragment extends Fragment {
         });
 
     }
+
+
 
     private void sendNotification(String member) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "channelId")
