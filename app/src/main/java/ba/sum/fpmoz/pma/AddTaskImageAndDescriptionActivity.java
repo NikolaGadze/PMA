@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -40,6 +41,8 @@ public class AddTaskImageAndDescriptionActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+    private ProgressBar progressBar;
+
 
 
     @Override
@@ -58,6 +61,7 @@ public class AddTaskImageAndDescriptionActivity extends AppCompatActivity {
         uploadButton = findViewById(R.id.uploadButton);
 
         uploadButton.setEnabled(false);
+        progressBar = findViewById(R.id.progress_bar_add_image_and_desc);
 
         taskId = getIntent().getStringExtra("taskId");
 
@@ -127,6 +131,9 @@ public class AddTaskImageAndDescriptionActivity extends AppCompatActivity {
 
     private void uploadImageToFirebaseStorage() {
         if (imageUri != null) {
+            // Make the ProgressBar visible
+            progressBar.setVisibility(View.VISIBLE);
+
             StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images/" + UUID.randomUUID().toString());
             storageReference.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -135,39 +142,39 @@ public class AddTaskImageAndDescriptionActivity extends AppCompatActivity {
                             storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    // Get the current user
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     String fullName = user.getDisplayName();
 
-                                    HandleTaskImageInformation handleTaskImageInformation = new HandleTaskImageInformation(taskId, uri.toString(), descriptionEditText.getText().toString(), fullName);
+                                    HandleTaskImageInformation handleTaskImageInformation = new HandleTaskImageInformation(user.getUid(), uri.toString(), descriptionEditText.getText().toString(), fullName, taskId);
 
-                                    // Get a reference to your Firebase database
-                                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("tasks").child(taskId);
+                                    // Modify the database reference to point to the "images" node
+                                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("images").child(taskId);
                                     databaseReference.setValue(handleTaskImageInformation)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
-                                                    // Clear the descriptionEditText and imageView
                                                     descriptionEditText.setText("");
                                                     imageView.setImageDrawable(null);
 
                                                     Log.d("AddTaskImageAndDescriptionActivity", "Database write successful");
 
-                                                    // Show a toast message
                                                     Toast.makeText(AddTaskImageAndDescriptionActivity.this, "Upload successful", Toast.LENGTH_SHORT).show();
 
-                                                    // Start the ViewSingleTaskInfoActivity
                                                     Intent intent = new Intent(AddTaskImageAndDescriptionActivity.this, SingleTaskViewActivity.class);
                                                     startActivity(intent);
+
+                                                    // Hide the ProgressBar
+                                                    progressBar.setVisibility(View.GONE);
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
-
                                                     Log.e("AddTaskImageAndDescriptionActivity", "Database write failed", e);
-                                                    // Show a toast message
                                                     Toast.makeText(AddTaskImageAndDescriptionActivity.this, "Upload failed", Toast.LENGTH_SHORT).show();
+
+                                                    // Hide the ProgressBar
+                                                    progressBar.setVisibility(View.GONE);
                                                 }
                                             });
                                 }
@@ -177,8 +184,10 @@ public class AddTaskImageAndDescriptionActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            // Handle any errors
                             Log.e("Upload error", e.getMessage(), e);
+
+                            // Hide the ProgressBar
+                            progressBar.setVisibility(View.GONE);
                         }
                     });
         }
