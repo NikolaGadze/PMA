@@ -17,6 +17,8 @@ public class HandleTaskInformation implements Serializable {
 
     public String creatorUUID;
 
+    public String taskId;
+
     public HandleTaskInformation() {}
 
     public HandleTaskInformation(String name, String description, String dateOfCreation, String dateOfCompletion, String status, Map<String, Boolean> members, List<Image> images, String creatorUUID) {
@@ -28,6 +30,19 @@ public class HandleTaskInformation implements Serializable {
         this.members = members;
         this.images = images;
         this.creatorUUID = creatorUUID;
+
+    }
+
+    public HandleTaskInformation(String name, String description, String dateOfCreation, String dateOfCompletion, String status, Map<String, Boolean> members, List<Image> images, String creatorUUID, String taskId) {
+        this.name = name;
+        this.description = description;
+        this.dateOfCreation = dateOfCreation;
+        this.dateOfCompletion = dateOfCompletion;
+        this.status = status;
+        this.members = members;
+        this.images = images;
+        this.creatorUUID = creatorUUID;
+        this.taskId = taskId;
     }
 
     public String getName() {
@@ -92,5 +107,13 @@ public class HandleTaskInformation implements Serializable {
 
     public void setCreatorUUID(String creatorUUID) {
         this.creatorUUID = creatorUUID;
+    }
+
+    public String getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
     }
 }

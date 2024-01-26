@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -55,5 +56,21 @@ public class SingleTaskViewActivity extends AppCompatActivity {
         } else {
             fabEdit.hide();
         }
+
+        FloatingActionButton fabAdd = findViewById(R.id.fab_add);
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String taskId = task.getTaskId();
+                if (taskId != null) {
+                    Intent intent = new Intent(SingleTaskViewActivity.this, AddTaskImageAndDescriptionActivity.class);
+                    intent.putExtra("taskName", task.getName()); // Pass the name of the task
+                    intent.putExtra("taskId", taskId); // Pass the id of the task
+                    startActivity(intent);
+                } else {
+                    Log.e("SingleTaskViewActivity", "Task ID is null");
+                }
+            }
+        });
     }
 }
