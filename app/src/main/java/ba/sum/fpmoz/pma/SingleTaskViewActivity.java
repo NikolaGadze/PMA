@@ -49,13 +49,27 @@ public class SingleTaskViewActivity extends AppCompatActivity {
         TextView status = findViewById(R.id.status_value);
         status.setText(task.getStatus());
 
-        FloatingActionButton fabEdit = findViewById(R.id.fab_edit);
+        FloatingActionButton fabViewMemberData = findViewById(R.id.fab_view_member_data);
 
-        if (currentUserUUID.equals(task.getCreatorUUID())) {
-            fabEdit.show();
-        } else {
-            fabEdit.hide();
-        }
+        fabViewMemberData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String taskId = task.getTaskId();
+                if (taskId != null) {
+                    Intent intent = new Intent(SingleTaskViewActivity.this, ViewSingleTaskDataActivity.class);
+                    intent.putExtra("taskName", task.getName()); // Pass the name of the task
+                    intent.putExtra("taskId", taskId); // Pass the id of the task
+                    intent.putExtra("taskFieldId", task.getTaskId()); //Pass the id of the task that is connected to Images node
+                    startActivity(intent);
+                } else {
+                    Log.e("SingleTaskViewActivity", "Task ID is null");
+                }
+            }
+        });
+
+
+
+
 
         FloatingActionButton fabAdd = findViewById(R.id.fab_add);
         fabAdd.setOnClickListener(new View.OnClickListener() {

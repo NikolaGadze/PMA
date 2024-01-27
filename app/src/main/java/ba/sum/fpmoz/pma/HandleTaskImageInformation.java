@@ -32,4 +32,44 @@ public class HandleTaskImageInformation {
         this.usersFullName = usersFullName;
         this.taskID = taskID;
     }
+
+    public String getUserUUID() {
+        return userUUID;
+    }
+
+    public void setUserUUID(String userUUID) {
+        this.userUUID = userUUID;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getUsersFullName() {
+        return usersFullName;
+    }
+
+    public void setUsersFullName(String usersFullName) {
+        this.usersFullName = usersFullName;
+    }
+
+    public String getTaskID() {
+        return taskID;
+    }
+
+    public void setTaskID(String taskID) {
+        this.taskID = taskID;
+    }
 }
